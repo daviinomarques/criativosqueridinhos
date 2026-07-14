@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Obrigado pela sua Compra!</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0 }
+
+:root {
+  --bg:      #09090b;
+  --s1:      #111116;
+  --s2:      #18181f;
+  --b1:      #22222e;
+  --b2:      #2e2e3e;
+  --b3:      #44445a;
+  --text:    #eceae2;
+  --muted:   #80808e;
+  --dim:     #404050;
+  --acc:     #a8f060;
+  --acc2:    #60d0a0;
+  --danger:  #e05050;
+  --warn:    #d09030;
+
+  --fm: 'DM Mono', monospace;
+  --fb: 'DM Sans', sans-serif;
+  --r:  8px;
+  --rl: 14px;
+
+  --shadow: 0 4px 28px rgba(0,0,0,.5);
+  --shadow-acc: 0 0 32px rgba(160,240,80,.15);
+}
+
+html { scroll-behavior: smooth }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--fb);
+  font-size: 16px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background-image: radial-gradient(circle, rgba(255,255,255,.025) 1px, transparent 1px);
+  background-size: 32px 32px;
+  pointer-events: none; z-index: 0;
+}
+
+/* glow radial no fundo */
+body::after {
+  content: '';
+  position: fixed;
+  top: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 700px; height: 400px;
+  background: radial-gradient(ellipse at center, rgba(168,240,96,.07) 0%, transparent 70%);
+  pointer-events: none; z-index: 0;
+}
+
+.container {
+  max-width: 620px;
+  margin: 0 auto;
+  padding: 3rem 1.25rem;
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  text-align: center;
+}
+
+/* ── CHECK ICON ── */
+.check-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2rem;
+  animation: popIn .6s cubic-bezier(.34,1.56,.64,1) both;
+}
+
+.check-circle {
+  width: 88px; height: 88px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--acc), var(--acc2));
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 0 0 16px rgba(168,240,96,.08), 0 0 48px rgba(168,240,96,.25);
+  position: relative;
+}
+
+.check-circle svg {
+  width: 40px; height: 40px;
+}
+
+@keyframes popIn {
+  from { opacity: 0; transform: scale(.5) }
+  to   { opacity: 1; transform: scale(1) }
+}
+
+/* ── BADGE ── */
+.section-tag {
+  display: inline-block;
+  font-family: var(--fm);
+  font-size: 11px; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--acc);
+  border: 1px solid rgba(160,240,80,.2);
+  background: rgba(160,240,80,.05);
+  border-radius: 100px;
+  padding: 6px 18px;
+  margin-bottom: 1.25rem;
+  animation: fadeUp .5s .1s ease both;
+}
+
+/* ── HEADLINE ── */
+.headline {
+  font-size: clamp(1.7rem, 5vw, 2.6rem);
+  font-weight: 500;
+  line-height: 1.2;
+  margin-bottom: .75rem;
+  animation: fadeUp .5s .2s ease both;
+}
+
+.headline .hl { color: var(--acc) }
+
+.sub {
+  font-size: 16px;
+  color: var(--muted);
+  margin-bottom: 2.25rem;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+  animation: fadeUp .5s .3s ease both;
+}
+
+/* ── INFO CARD ── */
+.info-card {
+  background: var(--s1);
+  border: 1px solid var(--b2);
+  border-radius: var(--rl);
+  padding: 28px 28px 24px;
+  margin-bottom: 1.5rem;
+  box-shadow: var(--shadow-acc);
+  animation: fadeUp .5s .4s ease both;
+  text-align: left;
+}
+
+.info-card-header {
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 1.25rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--b1);
+}
+
+.info-icon {
+  width: 36px; height: 36px; flex-shrink: 0;
+  background: rgba(168,240,96,.1);
+  border: 1px solid rgba(168,240,96,.2);
+  border-radius: var(--r);
+  display: flex; align-items: center; justify-content: center;
+}
+
+.info-icon svg { width: 18px; height: 18px; color: var(--acc) }
+
+.info-card-header-text h3 {
+  font-size: 14px; font-weight: 500;
+  color: var(--text);
+  margin-bottom: 2px;
+}
+
+.info-card-header-text span {
+  font-family: var(--fm); font-size: 10px;
+  letter-spacing: .06em; text-transform: uppercase;
+  color: var(--acc);
+}
+
+.steps {
+  list-style: none;
+  display: flex; flex-direction: column; gap: 12px;
+}
+
+.step {
+  display: flex; align-items: flex-start; gap: 12px;
+  font-size: 14.5px; color: var(--text);
+}
+
+.step-num {
+  width: 24px; height: 24px; flex-shrink: 0;
+  background: linear-gradient(135deg, var(--acc), var(--acc2));
+  color: #000;
+  font-family: var(--fm); font-weight: 700; font-size: 11px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  margin-top: 1px;
+}
+
+.step span strong {
+  color: var(--text);
+  font-weight: 500;
+}
+
+.step-highlight {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-family: var(--fm); font-size: 11px;
+  background: rgba(168,240,96,.08);
+  border: 1px solid rgba(168,240,96,.15);
+  color: var(--acc);
+  border-radius: 100px;
+  padding: 2px 10px;
+  margin-left: 4px;
+  vertical-align: middle;
+}
+
+/* ── TIMER PILL ── */
+.timer-pill {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--fm); font-size: 11px; letter-spacing: .05em;
+  color: var(--text);
+  border: 1px solid var(--b2);
+  background: var(--s2);
+  border-radius: 100px;
+  padding: 7px 16px;
+  margin-top: 1rem;
+}
+
+.t-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--acc);
+  animation: blink 1.2s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:.25} }
+
+#timer-text { font-variant-numeric: tabular-nums; color: var(--acc); font-weight: 500 }
+
+/* ── DIVIDER ── */
+.divider {
+  display: flex; align-items: center; gap: 12px;
+  margin: 1.5rem 0;
+  animation: fadeUp .5s .5s ease both;
+}
+
+.divider::before, .divider::after {
+  content: ''; flex: 1; height: 1px; background: var(--b1);
+}
+
+.divider span {
+  font-family: var(--fm); font-size: 10px; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--dim);
+  white-space: nowrap;
+}
+
+/* ── CTA WHATSAPP ── */
+.cta-section {
+  animation: fadeUp .5s .6s ease both;
+}
+
+.cta-label {
+  font-family: var(--fm); font-size: 11px; letter-spacing: .06em; text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: .85rem;
+  display: block;
+}
+
+.btn-whatsapp {
+  display: inline-flex; align-items: center; justify-content: center; gap: 12px;
+  width: 100%;
+  background: linear-gradient(135deg, #25D366, #1aad53);
+  color: #fff;
+  font-family: var(--fm);
+  font-size: 14px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+  padding: 18px 28px;
+  border-radius: 100px;
+  border: none; cursor: pointer; text-decoration: none;
+  transition: transform .18s, box-shadow .18s;
+  box-shadow: 0 3px 24px rgba(37,211,102,.25);
+  margin-bottom: .65rem;
+}
+
+.btn-whatsapp:hover { transform: translateY(-2px); box-shadow: 0 6px 36px rgba(37,211,102,.42) }
+
+.btn-whatsapp svg { width: 22px; height: 22px; flex-shrink: 0 }
+
+.btn-whatsapp-sub {
+  font-family: var(--fm); font-size: 10px; letter-spacing: .05em;
+  color: var(--dim); text-transform: uppercase;
+  display: block;
+}
+
+/* ── FOOTER ── */
+.page-footer {
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--b1);
+  animation: fadeUp .5s .7s ease both;
+}
+
+.page-footer p {
+  font-family: var(--fm); font-size: 10px;
+  color: var(--dim); letter-spacing: .06em; line-height: 2;
+  text-transform: uppercase;
+}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px) }
+  to   { opacity: 1; transform: translateY(0) }
+}
+
+@media (max-width: 480px) {
+  .container { padding: 2rem 1rem }
+  .info-card { padding: 20px 16px }
+  .headline { font-size: 1.6rem }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- Check icon -->
+  <div class="check-wrap">
+    <div class="check-circle">
+      <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M8 20L16 28L32 12" stroke="#000" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- Badge -->
+  <div class="section-tag">✦ Compra Confirmada</div>
+
+  <!-- Headline -->
+  <h1 class="headline">
+    Obrigado pela<br>sua <span class="hl">compra!</span>
+  </h1>
+
+  <p class="sub">
+    Seu pedido foi processado com sucesso. Agora é só aguardar o acesso chegar no seu e-mail.
+  </p>
+
+  <!-- Info card -->
+  <div class="info-card">
+    <div class="info-card-header">
+      <div class="info-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+          <polyline points="22,6 12,13 2,6"/>
+        </svg>
+      </div>
+      <div class="info-card-header-text">
+        <h3>Acesso à Área de Membros</h3>
+        <span>Memberkit · Envio automático</span>
+      </div>
+    </div>
+
+    <ul class="steps">
+      <li class="step">
+        <div class="step-num">1</div>
+        <span>Verifique seu <strong>e-mail cadastrado</strong> — o link de acesso para a área de membros no <span class="step-highlight">Memberkit</span> será enviado em até <strong>5 minutos</strong>.</span>
+      </li>
+      <li class="step">
+        <div class="step-num">2</div>
+        <span>Confira também a <strong>caixa de spam</strong> ou promoções caso não encontre na caixa de entrada.</span>
+      </li>
+      <li class="step">
+        <div class="step-num">3</div>
+        <span>Se não chegou ou está tendo problema com o acesso, <strong>fale com a Jacqueline</strong> pelo botão abaixo.</span>
+      </li>
+    </ul>
+
+    <div class="timer-pill">
+      <div class="t-dot"></div>
+      Aguardando envio · <span id="timer-text">05:00</span>
+    </div>
+  </div>
+
+  <!-- Divider -->
+  <div class="divider">
+    <span>Precisando de ajuda?</span>
+  </div>
+
+  <!-- CTA WhatsApp -->
+  <div class="cta-section">
+    <span class="cta-label">Suporte direto · Clique e salve o contato</span>
+    <a
+      href="https://api.whatsapp.com/send/?phone=553192778823&text=Ol%C3%A1+Jacqueline%2C+tudo+bem%3F+Acabei+de+comprar+o+An%C3%BAncios+Queridinhos+e+ainda+n%C3%A3o+recebi+o+email+com+o+acesso%2C+poderia+verificar+por+gentileza%3F+Meu+email+da+compra+%C3%A9%3A&type=phone_number&app_absent=0"
+      target="_blank"
+      class="btn-whatsapp"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+      </svg>
+      Falar com a Jacqueline
+    </a>
+    <span class="btn-whatsapp-sub">Salve o contato · (31) 9277-8823 · WhatsApp</span>
+  </div>
+
+  <!-- Footer -->
+  <div class="page-footer">
+    <p>© 2026 · Todos os direitos reservados<br>Dúvidas? Entre em contato pelo WhatsApp acima</p>
+  </div>
+
+</div>
+
+<script>
+  // Countdown 5 minutos
+  let totalSeconds = 5 * 60;
+  const timerEl = document.getElementById('timer-text');
+
+  function updateTimer() {
+    const m = Math.floor(totalSeconds / 60);
+    const s = totalSeconds % 60;
+    timerEl.textContent = `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+    if (totalSeconds > 0) {
+      totalSeconds--;
+      setTimeout(updateTimer, 1000);
+    } else {
+      timerEl.textContent = 'Verifique seu e-mail!';
+      timerEl.style.color = 'var(--acc)';
+    }
+  }
+
+  updateTimer();
+</script>
+</body>
+</html>
